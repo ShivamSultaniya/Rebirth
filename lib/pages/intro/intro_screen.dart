@@ -25,7 +25,7 @@ class _IntroScreenState extends State<IntroScreen>
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 700),
       vsync: this,
     );
 
@@ -41,8 +41,8 @@ class _IntroScreenState extends State<IntroScreen>
 
     _offsetAnimation = Tween<Offset>(
       begin: Offset.zero,
-      end: const Offset(0.0, -5.23),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+      end: const Offset(0.0, -5.43),
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
 
     Future.delayed(const Duration(milliseconds: 600), () {
       _controller.forward().then((_) {
@@ -68,7 +68,7 @@ class _IntroScreenState extends State<IntroScreen>
 
     Navigator.of(context).push(
       PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 1000),
+        transitionDuration: const Duration(milliseconds: 800),
         pageBuilder: (context, animation, secondaryAnimation) {
           return const OnboardingScreen(); // <-- return is now ensured
         },
@@ -100,16 +100,92 @@ class _IntroScreenState extends State<IntroScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-        child: Center(
-          child:
-              _showQuote
-                  ? Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Text(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.grey, Colors.grey],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          child: Center(
+            child:
+                _showQuote
+                    ? Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text(
+                          'Rebirth.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2.0,
+                          ),
+                        ),
+                        FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: const [
+                              Text(
+                                'The journey of a thousand miles begins with one step.',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                "-Lao Tzu",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                                textAlign: TextAlign.right,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: Padding(
+                            padding: const EdgeInsets.all(24.0),
+                            child: SlideAction(
+                              key: _slideKey,
+                              outerColor: Colors.grey[900],
+                              innerColor: Colors.white,
+                              elevation: 4,
+                              height: 70,
+                              sliderButtonIcon: const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.black,
+                              ),
+                              text: 'Let\'s Begin',
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 1.2,
+                              ),
+                              onSubmit: () async {
+                                await Future.delayed(
+                                  const Duration(milliseconds: 300),
+                                );
+                                navigateWithRadialTransition(); // Explicit return to satisfy nullable Future
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                    : SlideTransition(
+                      position: _offsetAnimation,
+                      child: const Text(
                         'Rebirth.',
                         style: TextStyle(
                           color: Colors.white,
@@ -118,77 +194,8 @@ class _IntroScreenState extends State<IntroScreen>
                           letterSpacing: 2.0,
                         ),
                       ),
-                      FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: const [
-                            Text(
-                              'The journey of a thousand miles begins with one step.',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "-Lao Tzu",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontStyle: FontStyle.italic,
-                              ),
-                              textAlign: TextAlign.right,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FadeTransition(
-                        opacity: _fadeAnimation,
-                        child: Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: SlideAction(
-                            key: _slideKey,
-                            outerColor: Colors.grey[900],
-                            innerColor: Colors.white,
-                            elevation: 4,
-                            height: 70,
-                            sliderButtonIcon: const Icon(
-                              Icons.arrow_forward,
-                              color: Colors.black,
-                            ),
-                            text: 'Let\'s Begin',
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1.2,
-                            ),
-                            onSubmit: () async {
-                              await Future.delayed(
-                                const Duration(milliseconds: 300),
-                              );
-                              navigateWithRadialTransition();
-                              return; // Explicit return to satisfy nullable Future
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                  : SlideTransition(
-                    position: _offsetAnimation,
-                    child: const Text(
-                      'Rebirth.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 2.0,
-                      ),
                     ),
-                  ),
+          ),
         ),
       ),
     );
