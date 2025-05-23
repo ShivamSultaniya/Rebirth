@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rebirth_draft_2/Components/app_colors.dart';
 import 'package:auto_hide_keyboard/auto_hide_keyboard.dart';
+import 'package:rebirth_draft_2/Components/buttons.dart';
+import 'package:rebirth_draft_2/pages/OnBoarding/anti_vision.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -9,92 +11,105 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Tell us about yourself',
-              style: TextStyle(
-                color: AppColors.textColor,
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2.0,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 140),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Tell Us About Yourself',
+                style: TextStyle(
+                  color: AppColors.textColor,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2.0,
+                ),
               ),
-            ),
-            SizedBox(height: 40),
-            Column(
-              children: [
-                AutoHideKeyboard(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondaryColor,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+              SizedBox(height: 40),
+              Column(
+                children: [
+                  AutoHideKeyboard(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.secondaryColor,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'Name',
+                        hintStyle: TextStyle(color: AppColors.hintColor),
                       ),
-                      hintText: 'Name',
-                      hintStyle: TextStyle(color: AppColors.hintColor),
+                      style: TextStyle(color: AppColors.textColor),
                     ),
-                    style: TextStyle(color: AppColors.textColor),
                   ),
-                ),
-                SizedBox(height: 20),
-                AutoHideKeyboard(
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondaryColor,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+                  SizedBox(height: 20),
+                  AutoHideKeyboard(
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.secondaryColor,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'Age',
+                        hintStyle: TextStyle(color: AppColors.hintColor),
                       ),
-                      hintText: 'Age',
-                      hintStyle: TextStyle(color: AppColors.hintColor),
+                      style: TextStyle(color: AppColors.textColor),
                     ),
-                    style: TextStyle(color: AppColors.textColor),
                   ),
-                ),
-                SizedBox(height: 20),
-                AutoHideKeyboard(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondaryColor,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+                  SizedBox(height: 20),
+                  AutoHideKeyboard(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.secondaryColor,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'Location',
+                        hintStyle: TextStyle(color: AppColors.hintColor),
                       ),
-                      hintText: 'Location',
-                      hintStyle: TextStyle(color: AppColors.hintColor),
+                      style: TextStyle(color: AppColors.textColor),
                     ),
-                    style: TextStyle(color: AppColors.textColor),
                   ),
-                ),
-                SizedBox(height: 20),
-                AutoHideKeyboard(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.secondaryColor,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
+                  SizedBox(height: 20),
+                  AutoHideKeyboard(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.secondaryColor,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        hintText: 'Occupation',
+                        hintStyle: TextStyle(color: AppColors.hintColor),
                       ),
-                      hintText: 'Occupation',
-                      hintStyle: TextStyle(color: AppColors.hintColor),
+                      style: TextStyle(color: AppColors.textColor),
                     ),
-                    style: TextStyle(color: AppColors.textColor),
                   ),
-                ),
-                SizedBox(height: 20),
-                DropdownMenuExample(),
-              ],
-            ),
-          ],
+                  SizedBox(height: 20),
+                  DropdownMenuExample(),
+                  SizedBox(height: 50),
+                  ElevatedButtonCustom(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AntiVision(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

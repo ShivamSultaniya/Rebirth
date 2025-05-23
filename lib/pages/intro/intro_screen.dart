@@ -103,7 +103,7 @@ class _IntroScreenState extends State<IntroScreen>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.grey, Colors.grey],
+            colors: [Colors.black, Colors.grey],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
