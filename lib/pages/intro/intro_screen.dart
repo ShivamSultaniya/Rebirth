@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rebirth_draft_2/Components/app_colors.dart';
 import 'package:rebirth_draft_2/pages/OnBoarding/onboarding_screen.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
@@ -101,11 +102,15 @@ class _IntroScreenState extends State<IntroScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.black, Colors.grey],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            colors: [
+              AppColors.primaryColor,
+              AppColors.backgroundColor,
+              AppColors.secondaryColor,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
         child: Padding(
@@ -116,68 +121,87 @@ class _IntroScreenState extends State<IntroScreen>
                     ? Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Text(
+                        Text(
                           'Rebirth.',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: AppColors.textColor,
                             fontSize: 40,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 2.0,
-                          ),
-                        ),
-                        FadeTransition(
-                          opacity: _fadeAnimation,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: const [
-                              Text(
-                                'The journey of a thousand miles begins with one step.',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(2, 2),
+                                blurRadius: 4,
+                                color: AppColors.primaryColor.withValues(
+                                  alpha: 0.3,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "-Lao Tzu",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                                textAlign: TextAlign.right,
                               ),
                             ],
                           ),
                         ),
                         FadeTransition(
                           opacity: _fadeAnimation,
+                          child: Container(
+                            padding: EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'The journey of a thousand miles begins with one step.',
+                                  style: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontSize: 24,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "-Lao Tzu",
+                                  style: TextStyle(
+                                    color: AppColors.accentColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                  textAlign: TextAlign.right,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        FadeTransition(
+                          opacity: _fadeAnimation,
                           child: Padding(
                             padding: const EdgeInsets.all(24.0),
-                            child: SlideAction(
-                              key: _slideKey,
-                              outerColor: Colors.grey[900],
-                              innerColor: Colors.white,
-                              elevation: 4,
-                              height: 70,
-                              sliderButtonIcon: const Icon(
-                                Icons.arrow_forward,
-                                color: Colors.black,
-                              ),
-                              text: 'Let\'s Begin',
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1.2,
-                              ),
-                              onSubmit: () async {
-                                await Future.delayed(
-                                  const Duration(milliseconds: 300),
-                                );
-                                navigateWithRadialTransition(); // Explicit return to satisfy nullable Future
-                              },
+                            child: Column(
+                              children: [
+                                SlideAction(
+                                  key: _slideKey,
+                                  outerColor: AppColors.primaryColor,
+                                  innerColor: AppColors.surfaceColor,
+                                  elevation: 8,
+                                  height: 70,
+                                  sliderButtonIcon: Icon(
+                                    Icons.arrow_forward_rounded,
+                                    color: AppColors.accentColor,
+                                    size: 28,
+                                  ),
+                                  text: 'Let\'s Begin',
+                                  textStyle: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1.2,
+                                  ),
+                                  onSubmit: () async {
+                                    await Future.delayed(
+                                      const Duration(milliseconds: 300),
+                                    );
+                                    navigateWithRadialTransition();
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -185,13 +209,22 @@ class _IntroScreenState extends State<IntroScreen>
                     )
                     : SlideTransition(
                       position: _offsetAnimation,
-                      child: const Text(
+                      child: Text(
                         'Rebirth.',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.textColor,
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 2.0,
+                          shadows: [
+                            Shadow(
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                              color: AppColors.primaryColor.withValues(
+                                alpha: 0.3,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
